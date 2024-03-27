@@ -41,7 +41,6 @@ function useActionState<State, Payload>(
 ];
 ```
 
--   Make `<form>`s behave the same with JavaScript enabled as they do with JavaScript disabled (confirmed that it will changed by @acdlite [here](https://github.com/facebook/react/pull/28491#issuecomment-2015283772))
 -   Add `payload` to the return of the hook
 -   Get rid of `State` as a required argument
 -   Get rid of the `State` argument on the server actions.
@@ -51,3 +50,7 @@ function useActionState<State, Payload>(
     -   It goes against React's fundamental idea that components are "Lego bricks" that can be added wherever and the functionality is baked in. Server Actions could be part of npm libraries, but it's frail with the current design.
     -   It gets rid of the State being serialized in the input - why is that even needed
 -   Add `initialPayload` to `useActionState()`
+
+Additional:
+
+-   Make `<form>`s with JavaScript mimic the behavior they have with JavaScript disabled (confirmed that it will changed by [@acdlite here](https://github.com/facebook/react/pull/28491#issuecomment-2015283772))
