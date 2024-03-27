@@ -7,7 +7,7 @@ However, the current API lacks some nuance needed for isomorphic forms. This rep
 -   **tl;dr:** Search the code for "😷" to see perceived issues.
 -   **tl;dr2:** Most of my headaches would disappear if `useFormState()`/`useActionState()` returned `Payload` which would be the data that was last successfully sent to the server.
 
-> Either I'm dumb or the API needs some refining.
+> Either I'm dumb or the API needs some refining. Maybe "current" values and errors should be stored in like a session variable? Maybe the server actions API isn't designed for returning anything at all?
 
 ## Clone it
 
