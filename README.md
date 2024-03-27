@@ -41,6 +41,7 @@ function useActionState<State, Payload>(
 ];
 ```
 
+-   Make `<form>`s behave the same with JavaScript enabled as they do with JavaScript disabled (confirmed that it will changed by @acdlite [here](https://github.com/facebook/react/pull/28491#issuecomment-2015283772))
 -   Add `payload` to the return of the hook
 -   Get rid of `State` as a required argument
 -   Get rid of the `State` argument on the server actions.
