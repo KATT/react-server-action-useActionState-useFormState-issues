@@ -1,4 +1,4 @@
-## Issues with `useFormState()` (& new `useActionState()`) hooks
+## Issues with the `useFormState()` & `useActionState()` hooks
 
 One of the key advantages, for me, of `useFormState()`/`useActionState()` and `<form action={action}>` is their ability to create isomorphic/universal forms that are progressively enhanced.
 
