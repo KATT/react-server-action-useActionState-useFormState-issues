@@ -1,10 +1,13 @@
-Search the code for 😷 to see issues.
+Search the code for "😷" to see perceived issues.
 
-## Proposition
+Either I'm dumb or the API needs some refining.
 
-Lengthier: https://github.com/facebook/react/pull/28491#issuecomment-2015032940
+## Prior art
 
-Maybe?:
+-   https://allanlasser.com/posts/2024-01-26-avoid-using-reacts-useformstatus
+-   https://github.com/facebook/react/pull/28491#issuecomment-2015032940
+
+## Proposed API
 
 ```ts
 function useActionState<State, Payload>(
