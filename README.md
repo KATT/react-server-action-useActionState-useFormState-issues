@@ -41,14 +41,13 @@ function useActionState<State, Payload>(
 ];
 ```
 
--   Add `payload` to the return of the hook
+-   Add `payload` to the return of the hook - it's good to use to set `defaultValue={}` & serializing the payload from the action is gnarly as shown in this example
 -   Get rid of `State` as a required argument
 -   Get rid of the `State` argument on the server actions.
-    -   I don't see why it's needed at all, the input payload should be enough
+    -   It gets rid of the State being serialized in the input that is passed back-and-forth that to me isn't even needed?
     -   It even requires a disclaimer [like this](https://react.dev/reference/react-dom/hooks/useFormState#my-action-can-no-longer-read-the-submitted-form-data)
     -   It changes the server-side depending on _how_ you call it, which is kinda odd
     -   It goes against React's fundamental idea that components are "Lego bricks" that can be added wherever and the functionality is baked in. Server Actions could be part of npm libraries, but it's frail with the current design.
-    -   It gets rid of the State being serialized in the input - why is that even needed
 -   Add `initialPayload` to `useActionState()`
 
 Additional:
