@@ -21,9 +21,11 @@ export async function createUser(
 	// wait 300ms
 	await new Promise((resolve) => setTimeout(resolve, 300));
 
+	const values = Object.fromEntries(payload);
+
 	const errors: CreateUserState["errors"] = {};
-	if (usernames.includes(payload.get("username") as string)) {
-		errors.username = "Username is already taken";
+	if (usernames.includes(values.username as string)) {
+		errors.username = `Username '${values.username}' is already taken`;
 	}
 	if (Object.keys(errors).length > 0) {
 		// 😷 Some issues:
@@ -38,7 +40,7 @@ export async function createUser(
 			// 😷 Why do I even need to return this?
 			// 😷 I have to **pick** values. I can't use `Object.fromEntries(formData)` either since that includes a bunch of junk of React-internals
 			input: {
-				username: payload.get("username") as string,
+				username: values.username as string,
 			},
 		};
 	}
