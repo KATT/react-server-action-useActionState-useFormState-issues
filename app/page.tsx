@@ -83,10 +83,19 @@ export default function Home() {
 				Home
 			</h1>
 			<CreateUserForm />
-			<p>
-				Adding a user with the username <code>john</code> will result in
-				an error.
-			</p>
+			<ul className="space-y-2">
+				<li>
+					Adding a user with the username <code>john</code> will
+					result in an error.
+				</li>
+				<li>Try disabling JavaScript to see that the page works</li>
+				<li>
+					See the{" "}
+					<a href="https://github.com/KATT/react-server-action-useformstate-issues">
+						README on GitHub
+					</a>
+				</li>
+			</ul>
 		</div>
 	);
 }
