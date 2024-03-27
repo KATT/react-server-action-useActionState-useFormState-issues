@@ -11,6 +11,8 @@ export type CreateUserState = {
 	};
 };
 
+const usernames = ["john", "jane"];
+
 export async function createUser(
 	_: CreateUserState,
 	payload: FormData,
@@ -18,8 +20,9 @@ export async function createUser(
 	console.log("Creating user with payload", payload);
 	// wait 300ms
 	await new Promise((resolve) => setTimeout(resolve, 300));
+
 	const errors: CreateUserState["errors"] = {};
-	if (payload.get("username") === "john") {
+	if (usernames.includes(payload.get("username") as string)) {
 		errors.username = "Username is already taken";
 	}
 	if (Object.keys(errors).length > 0) {
@@ -33,11 +36,14 @@ export async function createUser(
 		return {
 			errors,
 			// 😷 Why do I even need to return this?
+			// 😷 I have to **pick** values. I can't use `Object.fromEntries(formData)` either since that includes a bunch of junk of React-internals
 			input: {
 				username: payload.get("username") as string,
 			},
 		};
 	}
+
+	usernames.push(payload.get("username") as string);
 
 	redirect("/success");
 }
