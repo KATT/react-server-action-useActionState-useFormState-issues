@@ -1,11 +1,18 @@
-Search the code for "😷" to see perceived issues.
+## Issues with `useFormState()` (& new `useActionState()`) hooks
 
-Either I'm dumb or the API needs some refining.
+One of the key advantages, for me, of `useFormState()`/`useActionState()` and `<form action={action}>` is their ability to create isomorphic/universal forms that are progressively enhanced.
+
+However, the current API lacks some nuance needed for isomorphic forms:
+
+**tl;dr:** Search the code for "😷" to see perceived issues.
+
+> Either I'm dumb or the API needs some refining.
 
 ## Prior art
 
 -   https://allanlasser.com/posts/2024-01-26-avoid-using-reacts-useformstatus
 -   https://github.com/facebook/react/pull/28491#issuecomment-2015032940
+-   https://github.com/facebook/react/pull/28491#issuecomment-2015585371
 
 ## Proposed API
 
@@ -26,9 +33,9 @@ function useActionState<State, Payload>(
 
 -   Add `payload` to the return of the hook
 -   Get rid of `State` as a required argument
--   Add `initialPayload` to `useActionState()`
 -   Get rid of the `State` argument on the server actions.
     -   I don't see why it's needed at all, the input payload should be enough
     -   It even requires a disclaimer [like this](https://react.dev/reference/react-dom/hooks/useFormState#my-action-can-no-longer-read-the-submitted-form-data)
     -   It changes the server-side depending on _how_ you call it, which is kinda odd
     -   It gets rid of the State being serialized in the input - why is that even needed
+-   Add `initialPayload` to `useActionState()`
