@@ -1,11 +1,14 @@
 "use client";
 
-// import { useFormState } from "react-dom";
 import { useFormState } from "react-dom";
 import { createUser } from "./_createUser";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
+/**
+ * When JavaScript is available, this component will render a toast.
+ * When JavaScript is not available, this component will render a box.
+ */
 function ErrorToastOrBox(props: { children: JSX.Element }) {
 	useEffect(() => {
 		const timeout = setTimeout(() => {
