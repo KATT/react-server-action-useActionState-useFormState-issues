@@ -4,8 +4,8 @@ One of the key advantages, for me, of `useFormState()`/`useActionState()` and `<
 
 However, the current API lacks some nuance needed for isomorphic forms. This repository aim to showcase those issues.
 
-**tl;dr:** Search the code for "😷" to see perceived issues.
-**tl;dr2:** Most of my headaches would disappear if `useFormState()`/`useActionState()` returned `Payload` which would be the data that was last successfully sent to the server.
+-   **tl;dr:** Search the code for "😷" to see perceived issues.
+-   **tl;dr2:** Most of my headaches would disappear if `useFormState()`/`useActionState()` returned `Payload` which would be the data that was last successfully sent to the server.
 
 > Either I'm dumb or the API needs some refining.
 
