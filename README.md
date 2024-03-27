@@ -1,6 +1,6 @@
 ## Issues with the `useFormState()` & `useActionState()` hooks
 
-One of the key advantages, for me, of `useFormState()`/`useActionState()` and `<form action={action}>` is their ability to create isomorphic/universal forms that are progressively enhanced.
+One of the key advantages, for me, of `useFormState()`/`useActionState()` and `<form action={action}>` is their ability to create isomorphic/universal forms that are progressively enhanced (fancy words for saying that forms work well with and without JS).
 
 However, the current API lacks some nuance needed for isomorphic forms. This repository aim to showcase those issues.
 
