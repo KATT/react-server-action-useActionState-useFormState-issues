@@ -9,6 +9,15 @@ However, the current API lacks some nuance needed for isomorphic forms. This rep
 
 > Either I'm dumb or the API needs some refining.
 
+## Clone it
+
+```sh
+git clone git@github.com:KATT/react-server-action-useActionState-useFormState-issues.git
+cd react-server-action-useActionState-useFormState-issues
+pnpm i
+pnpm dev
+```
+
 ## Prior art
 
 -   https://allanlasser.com/posts/2024-01-26-avoid-using-reacts-useformstatus
