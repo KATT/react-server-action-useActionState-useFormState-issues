@@ -32,7 +32,7 @@ function CreateUserForm() {
 
 	return (
 		<form action={action} className="space-y-4 shadow p-4">
-			{/* errors */}
+			{/* 😷 State is serialized as a hidden input here -- unnecessary payload, `<input type="hidden" name="$ACTION_1:0" value="{&quot;id&quot;:&quot;4a156bb69b4bf838c9c71c23a01294921f53ff23&quot;,&quot;bound&quot;:&quot;$@1&quot;}">`  */}
 			{state.errors && (
 				<ErrorToastOrBox>
 					<>Errors: {JSON.stringify(state.errors, null, 2)}</>
