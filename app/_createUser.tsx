@@ -1,6 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { getRequestStorage } from "use-action";
+import { storeFormData } from "../use-action/internals/requestStorage";
 
 export type CreateUserState = {
 	errors?: {
@@ -20,6 +22,8 @@ export async function createUser(
 	console.log("Creating user with payload", payload);
 	// wait 300ms
 	await new Promise((resolve) => setTimeout(resolve, 300));
+
+	storeFormData(payload);
 
 	const values = Object.fromEntries(payload);
 
