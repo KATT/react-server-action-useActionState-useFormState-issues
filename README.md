@@ -30,7 +30,6 @@ pnpm dev
 ```ts
 function useActionState<State, Payload>(
   action: (state: Awaited<State>, payload: Payload) => State,
-  initialPayload?: Payload | null,
   permalink?: string,
 ): [
   dispatch: (payload: Payload) => Promise<State>,
@@ -52,7 +51,6 @@ function useActionState<State, Payload>(
     -   It even requires a disclaimer [like this](https://react.dev/reference/react-dom/hooks/useFormState#my-action-can-no-longer-read-the-submitted-form-data)
     -   It changes the server-side depending on _how_ you call it, which is kinda odd
     -   It goes against React's fundamental idea that components are "Lego bricks" that can be added wherever and the functionality is baked in. Server Actions could be part of npm libraries, but it's frail with the current design.
--   Add `initialPayload` to `useActionState()`
 
 Additional:
 
