@@ -45,6 +45,7 @@ function useActionState<State, Payload>(
     -   it's good to use to set `defaultValue={}`
     -   serializing the payload from the action is gnarly as shown in this example
     -   returning payload for setting `defaultValue` is unnecessary
+    -   (payload can be stripped from e.g. `File` etc which can't really be hydrated)
 -   Get rid of `State` as a required argument
 -   Get rid of the `State` argument on the server actions.
     -   It gets rid of the `State` being serialized in the input that is passed back-and-forth (that to me isn't even needed?)
