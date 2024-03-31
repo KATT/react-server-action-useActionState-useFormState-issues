@@ -44,3 +44,20 @@ https://github.com/KATT/react-server-action-useActionState-useFormState-issues/b
 
 -   `createAction()` wrapper hacks into Next.js' request storage and stores an `.actionPayload` with the submitted `FormData`
 -   `<UseActionProvider>` is used to populate this to the `useAction()` handler
+
+## What we're missing here
+
+This work is mainly focused on enhancing the "no-JS-experience":
+
+-   `<form>`'s should clear after submission in JS.
+-   `payload` is always `null` in the client, will be only be a problem when forms actually clear
+
+### Play with it
+
+```sh
+git clone git@github.com:KATT/react-server-action-useActionState-useFormState-issues.git
+cd react-server-action-useActionState-useFormState-issues
+git checkout feat/hack
+pnpm i
+pnpm dev
+```
