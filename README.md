@@ -33,6 +33,8 @@ function useAction<State, Payload extends FormData>(
 
 > Obviously, I don't think any of this should be needed if React/Next.js provided a more sound primitive
 
+https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/968e65bd17a9c288b1e1491aa550bbd57e018ef4/app/layout.tsx#L22
+
 ## How this hack works
 
 -   `createAction()` wrapper hacks into Next.js' request storage and stores an `.actionPayload` with the submitted `FormData`
