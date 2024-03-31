@@ -5,6 +5,7 @@
 -   **Background:** see the [README of the `main`-branch](https://github.com/KATT/react-server-action-useActionState-useFormState-issues/tree/main)
 -   No notion of "default state" when calling the hook
 -   No need of returning input values in order to re-render `<input>`s values in SSR
+-   No two argument on actions, there's only 1 - your input
 
 ### API
 
