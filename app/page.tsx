@@ -1,10 +1,9 @@
 "use client";
 
-import { useFormState } from "react-dom";
-import { createUser } from "./_createUser";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { ENV, useAction } from "use-action";
+import { createUser } from "./_createUser";
 
 console.log({ ENV });
 /**
@@ -26,27 +25,15 @@ function ErrorToastOrBox(props: { children: JSX.Element }) {
 	);
 }
 function CreateUserForm() {
-	const [action, payload, state] = useAction(createUser);
-	console.log({ action, payload, state });
+	const [action, input, output] = useAction(createUser);
 
-	// if (typeof document === "undefined") {
-	// 	const storage = import("../use-action/internals/requestStorage")
-	// 		.then((it) => {
-	// 			console.log({ it });
-	// 			return it.getRequestStorage();
-	// 		})
-	// 		.then((it) => {
-	// 			console.log({ it });
-	// 		})
-	// 		.catch(console.error);
-	// }
 	return (
 		// 😷 `<form action={action}>` makes the form work differently with or without JS enabled (inputs should clear)
 		<form action={action} className="space-y-4 shadow p-4">
 			{/* 😷 State is serialized as a hidden input here -- unnecessary payload, `<input type="hidden" name="$ACTION_1:0" value="{&quot;id&quot;:&quot;4a156bb69b4bf838c9c71c23a01294921f53ff23&quot;,&quot;bound&quot;:&quot;$@1&quot;}">`  */}
-			{state?.errors && (
+			{output?.errors && (
 				<ErrorToastOrBox>
-					<>Errors: {JSON.stringify(state.errors, null, 2)}</>
+					<>Errors: {JSON.stringify(output.errors, null, 2)}</>
 				</ErrorToastOrBox>
 			)}
 			<div className="flex flex-col space-y-1">
@@ -62,7 +49,7 @@ function CreateUserForm() {
 					name="username"
 					placeholder="john"
 					// 😷 how come I have to return this from the backend / server action? It should be readily available in both places
-					defaultValue={payload?.get("username") as string}
+					defaultValue={input?.get("username") as string}
 					className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 					required
 				/>

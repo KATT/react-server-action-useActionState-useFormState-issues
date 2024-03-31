@@ -1,40 +1,29 @@
 "use client";
-
 import { createContext, use } from "react";
 import { useFormState } from "react-dom";
 
-type Value = null | {
-	formData: FormData;
-};
-const UseActionContext = createContext<Value>(null);
-
-export function UseActionProvider(props: {
-	children: React.ReactNode;
-	value: Value;
-}) {
-	console.log(
-		"Provider",
-		props.value,
-		"FormData?",
-		props.value?.formData instanceof FormData,
-	);
-	return (
-		<UseActionContext.Provider value={props.value}>
-			{props.children}
-		</UseActionContext.Provider>
-	);
-}
+export type Value = [
+	payload: unknown,
+	// TODO add info about the action
+];
+export const UseActionContext = createContext<null | Value>(null);
 
 export function useAction<State, Payload extends FormData>(
 	action: (state: Awaited<State>, payload: Payload) => State,
 	permalink?: string,
 ): [
+	/**
+	 * The action to use in a `<form>` element.
+	 */
 	dispatch: (payload: Payload) => State,
-	// "input"
+	/**
+	 * Will be `null` if no payload is available.
+	 */
 	payload: null | Payload,
-	// "output"
+	/**
+	 * Will be `null` if no state is available.
+	 */
 	state: Awaited<State> | null,
-	// pending: boolean;
 ] {
 	const ctx = use(UseActionContext);
 	const [state, dispatch] = useFormState<State>(
@@ -43,7 +32,7 @@ export function useAction<State, Payload extends FormData>(
 		permalink,
 	);
 
-	let payload = (ctx?.formData ?? null) as Payload | null;
+	let payload = (ctx?.[0] ?? null) as Payload | null;
 	if (payload && !(payload instanceof FormData)) {
 		const fd = new FormData();
 

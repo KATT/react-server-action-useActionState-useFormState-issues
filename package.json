@@ -9,12 +9,12 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"next": "canary",
+		"next": "14.2.0-canary.50",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",
-		"zod": "^3.22.4",
-		"use-action": "link:./use-action"
+		"use-action": "link:./use-action",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@types/node": "^20.11.30",
