@@ -7,7 +7,6 @@ interface RequestStoreWithActionPayload extends RequestStore {
 	actionPayload?: unknown;
 }
 export function getRequestStorage() {
-	console.log("hello--------------");
 	const storage = getExpectedRequestStore("getRequestStorage");
 
 	return storage as RequestStoreWithActionPayload;

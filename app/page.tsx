@@ -2,10 +2,9 @@
 
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { ENV, useAction } from "use-action";
+import { useAction } from "use-action";
 import { createUser } from "./_createUser";
 
-console.log({ ENV });
 /**
  * When JavaScript is available, this component will render a toast.
  * When JavaScript is not available, this component will render a box.

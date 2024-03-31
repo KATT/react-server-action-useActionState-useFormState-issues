@@ -2,11 +2,13 @@
 import { createContext, use } from "react";
 import { useFormState } from "react-dom";
 
-export type Value = [
+export type UseActionProviderValue = [
 	payload: unknown,
 	// TODO add info about the action
 ];
-export const UseActionContext = createContext<null | Value>(null);
+export const UseActionContext = createContext<null | UseActionProviderValue>(
+	null,
+);
 
 export function useAction<State, Payload extends FormData>(
 	action: (state: Awaited<State>, payload: Payload) => State,
@@ -43,4 +45,15 @@ export function useAction<State, Payload extends FormData>(
 	}
 
 	return [dispatch as any, payload, state];
+}
+
+export function UseActionProvider(props: {
+	children: React.ReactNode;
+	value: UseActionProviderValue | null;
+}) {
+	return (
+		<UseActionContext.Provider value={props.value}>
+			{props.children}
+		</UseActionContext.Provider>
+	);
 }

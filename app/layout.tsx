@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import { UseActionProvider } from "use-action";
+import { ENV, UseActionProvider, getUseActionProviderValue } from "use-action";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+
+console.log({ ENV });
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -16,8 +18,9 @@ export default function RootLayout(
 		children: React.ReactNode;
 	}>,
 ) {
+	const value = getUseActionProviderValue();
 	return (
-		<UseActionProvider>
+		<UseActionProvider value={value}>
 			<html lang="en">
 				<body className={inter.className}>
 					{props.children}

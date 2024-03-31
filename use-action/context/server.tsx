@@ -1,22 +1,12 @@
-"use client";
-import { UseActionContext } from "./shared";
 import { getRequestStorage } from "../lib/requestStorage";
+import { UseActionProviderValue } from "./shared";
 
-console.log("hello i am server");
-export function UseActionProvider(props: { children: React.ReactNode }) {
+export function getUseActionProviderValue(): UseActionProviderValue | null {
 	const storage = getRequestStorage();
-	return (
-		<UseActionContext.Provider
-			value={
-				storage.actionPayload
-					? [
-							//
-							storage.actionPayload,
-						]
-					: null
-			}
-		>
-			{props.children}
-		</UseActionContext.Provider>
-	);
+
+	if (storage.actionPayload) {
+		return null;
+	}
+
+	return [storage.actionPayload];
 }
