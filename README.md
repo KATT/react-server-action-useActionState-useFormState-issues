@@ -52,6 +52,7 @@ This work is mainly focused on enhancing the "no-JS-experience":
 -   `<form>`'s should clear after submission in JS
 -   `payload` is always `null` in the client, will be more highlighted when form clears in JS as well
 -   `payload` isn't tied to a specific action at the moment - `useAction(x)` shouldn't return payload of `useAction(y)`
+-   this is a hack, there's probably more
 
 ### Play with it
 
