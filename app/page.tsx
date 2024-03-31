@@ -26,6 +26,8 @@ function ErrorToastOrBox(props: { children: JSX.Element }) {
 function CreateUserForm() {
 	const [action, input, output] = useAction(createUser);
 
+	console.log({ action, input, output });
+
 	return (
 		// 😷 `<form action={action}>` makes the form work differently with or without JS enabled (inputs should clear)
 		<form action={action} className="space-y-4 shadow p-4">

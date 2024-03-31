@@ -3,8 +3,9 @@ import { UseActionProviderValue } from "./shared";
 
 export function getUseActionProviderValue(): UseActionProviderValue | null {
 	const storage = getRequestStorage();
+	console.log("FROM SERVER", storage.actionPayload);
 
-	if (storage.actionPayload) {
+	if (!("actionPayload" in storage)) {
 		return null;
 	}
 

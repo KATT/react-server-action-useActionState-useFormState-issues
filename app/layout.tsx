@@ -19,6 +19,7 @@ export default function RootLayout(
 	}>,
 ) {
 	const value = getUseActionProviderValue();
+	console.log({ value });
 	return (
 		<UseActionProvider value={value}>
 			<html lang="en">
