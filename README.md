@@ -29,6 +29,11 @@ function useAction<State, Payload extends FormData>(
 ];
 ```
 
+#### Usage
+
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/bb5c53788973a954c5549c846f711bc0ba15611b/app/page.tsx#L27
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/bb5c53788973a954c5549c846f711bc0ba15611b/app/page.tsx#L54
+
 #### Setting it up
 
 > Obviously, I don't think any of this wiring should be needed and that `payload` should be omnipresent in `useFormState()`
