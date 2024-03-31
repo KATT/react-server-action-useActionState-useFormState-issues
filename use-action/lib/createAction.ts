@@ -1,5 +1,8 @@
 import { storeActionPayload } from "./requestStorage";
 
+/**
+ * Wraps an action function to store its input as action payload in the request storage.
+ */
 export function createAction<TInput = FormData>() {
 	return function action<TOutput>(fn: (input: TInput) => Promise<TOutput>) {
 		return async function wrapper(...args: unknown[]) {
