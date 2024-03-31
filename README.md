@@ -29,11 +29,15 @@ function useAction<State, Payload extends FormData>(
 
 #### Setting it up
 
-##### `/app/layout.tsx`
+> Obviously, I don't think any of this should be needed if React/Next.js provided
 
-> Obviously, I don't think any of this should be needed if React/Next.js provided a more sound primitive
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/layout.tsx#L22
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/page.tsx#L27
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/_createUser.tsx#L11
 
-https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/968e65bd17a9c288b1e1491aa550bbd57e018ef4/app/layout.tsx#L22
+Yay, now I can just use `input?.get("username")`:
+
+https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/page.tsx#L54C20-L54C42
 
 ## How this hack works
 
