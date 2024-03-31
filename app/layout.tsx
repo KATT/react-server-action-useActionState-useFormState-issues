@@ -18,10 +18,8 @@ export default function RootLayout(
 		children: React.ReactNode;
 	}>,
 ) {
-	const value = getUseActionProviderValue();
-	console.log({ value });
 	return (
-		<UseActionProvider value={value}>
+		<UseActionProvider value={getUseActionProviderValue()}>
 			<html lang="en">
 				<body className={inter.className}>
 					{props.children}

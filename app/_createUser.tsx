@@ -21,6 +21,7 @@ export const createUser = createAction<FormData>()(async (payload) => {
 	}
 
 	if (Object.keys(errors).length > 0) {
+		// ✅ I don't need to return anything about the payload here
 		return {
 			errors,
 		};
