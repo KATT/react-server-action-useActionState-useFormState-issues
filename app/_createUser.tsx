@@ -16,7 +16,7 @@ export const createUser = createAction<FormData>()(async (payload) => {
 	const values = Object.fromEntries(payload);
 
 	const errors: ValidationErrors = {};
-	if (usernames.includes(values.username as string)) {
+	if (usernames.includes((values.username as string).trim().toLowerCase())) {
 		errors.username = `Username '${values.username}' is already taken`;
 	}
 
