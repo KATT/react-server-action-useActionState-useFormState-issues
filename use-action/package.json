@@ -1,0 +1,10 @@
+{
+	"name": "use-action",
+	"exports": {
+		".": {
+			"types": "./types.ts",
+			"browser": "./browser.ts",
+			"default": "./server.ts"
+		}
+	}
+}

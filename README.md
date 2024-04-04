@@ -1,61 +1,71 @@
-# Challenges with the `useFormState()` & `useActionState()` hooks
+# Evening-hack alternative to `useActionState()` / `useFormState()`
 
-One of the key advantages, for me, of `useFormState()`/`useActionState()` and `<form action={action}>` is their ability to create isomorphic/universal forms that are progressively enhanced (fancy words for saying that forms work well with and without JS).
+## Summary
 
-However, the current API lacks some nuance needed for isomorphic forms. This repository aims to showcase those issues.
+-   **Background:** see the [README of the `main`-branch](https://github.com/KATT/react-server-action-useActionState-useFormState-issues/tree/main)
+-   No notion of "default state" when calling the hook
+-   No need of returning input values in order to re-render `<input>`s values in SSR
+-   Not 2 arguments on actions, there's only 1 - your input
 
--   **tl;dr:** Search the code for "😷" to see my perceived issues.
--   **tl;dr2:** Most of my headaches would disappear if `useFormState()`/`useActionState()` returned `Payload` which would be the data that was last successfully sent to the server.
+### API
 
-> Either I'm dumb or the API needs some refining. Maybe "current" values and errors should be stored in like a session variable? Maybe the server actions API isn't designed for returning anything at all? Should it be a Redirect ([Post/Get/Redirect](https://en.wikipedia.org/wiki/Post/Redirect/Get)) on every response? But then it will be weird when JS is enabled.
+```tsx
+function useAction<State, Payload extends FormData>(
+	action: (state: Awaited<State>, payload: Payload) => State,
+	permalink?: string,
+): [
+	/**
+	 * The action to use in a `<form>` element.
+	 */
+	dispatch: (payload: Payload) => State,
+	/**
+	 * Will be `null` if no payload is available.
+	 */
+	payload: null | Payload,
+	/**
+	 * Will be `null` if no state is available.
+	 */
+	state: Awaited<State> | null,
+];
+```
 
-## Clone it the example
+#### Usage
+
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/bb5c53788973a954c5549c846f711bc0ba15611b/app/page.tsx#L27
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/bb5c53788973a954c5549c846f711bc0ba15611b/app/page.tsx#L54
+
+#### Setting it up
+
+> Obviously, I don't think any of this wiring should be needed and that `payload` should be omnipresent in `useFormState()`
+
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/layout.tsx#L22
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/page.tsx#L27
+-   https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/55943159220c0d82b8653747971e4b8662d2cb6f/app/_createUser.tsx#L11
+
+Yay, now I can just use `input?.get("username")`:
+
+https://github.com/KATT/react-server-action-useActionState-useFormState-issues/blob/bb5c53788973a954c5549c846f711bc0ba15611b/app/page.tsx#L54
+
+## How this hack works
+
+-   `createAction()` wrapper hacks into Next.js' request storage and stores an `.actionPayload` with the submitted `FormData`
+-   `<UseActionProvider>` is used to populate this to the `useAction()` handler
+
+## What we're missing here
+
+This work is mainly focused on enhancing the "no-JS-experience":
+
+-   `<form>`'s should clear after submission in JS
+-   `payload` is always `null` in the client, will be more highlighted when form clears in JS as well
+-   `payload` isn't tied to a specific action at the moment - `useAction(x)` shouldn't return payload of `useAction(y)`
+-   this is a hack, there's probably more
+
+### Play with it
 
 ```sh
 git clone git@github.com:KATT/react-server-action-useActionState-useFormState-issues.git
 cd react-server-action-useActionState-useFormState-issues
+git checkout feat/hack
 pnpm i
 pnpm dev
 ```
-
-## Prior art on discussion
-
--   https://allanlasser.com/posts/2024-01-26-avoid-using-reacts-useformstatus
--   https://github.com/facebook/react/pull/28491#issuecomment-2015032940
--   https://github.com/facebook/react/pull/28491#issuecomment-2015585371
--   _[... something I'm missing?]_
-
-## Proposed API
-
-```ts
-function useActionState<State, Payload>(
-  action: (state: Awaited<State>, payload: Payload) => State,
-  permalink?: string,
-): [
-  dispatch: (payload: Payload) => Promise<State>,
-  // "input"
-  payload: null | Payload,
-  // "output"
-  state: State,
-  pending: boolean;
-];
-```
-
--   Add `payload` to the return of the hook
-    -   it's good to use to set `defaultValue={}`
-    -   serializing the payload from the action is gnarly as shown in this example
-    -   returning payload for setting `defaultValue` is unnecessary
-    -   (payload can be stripped from e.g. `File` etc which can't really be hydrated)
--   Get rid of `State` as a required argument
--   Get rid of the `State` argument on the server actions.
-    -   It gets rid of the `State` being serialized in the input that is passed back-and-forth (that to me isn't even needed?)
-    -   It even requires a disclaimer [like this](https://react.dev/reference/react-dom/hooks/useFormState#my-action-can-no-longer-read-the-submitted-form-data)
-    -   It changes the server-side depending on _how_ you call it, which is kinda odd
-    -   It goes against React's fundamental idea that components are "Lego bricks" that can be added wherever and the functionality is baked in. Server Actions could be part of npm libraries, but it's frail with the current design.
-
-Additional:
-
--   Make `<form>`s with JavaScript mimic the behavior they have with JavaScript disabled (confirmed that it will changed by [@acdlite here](https://github.com/facebook/react/pull/28491#issuecomment-2015283772))
--   Maybe make `useActionState()` return an options object instead? 4 tuple values is a lot to keep track of (but that's easy to build abstractions that does)
-
-> With the above API, it will be possible to make great forms in React without using any form libraries
